@@ -30,9 +30,23 @@ export function SpanPais(props)
 
 export function SpanAdmissao(props)
 {
-    return (
-        <span className="contact__data">{props.text}</span>
-    );
+    let day=props.text.split('-')[2];
+    let month=props.text.split('-')[1];
+    let year=props.text.split('-')[0];
+    
+    if(!isNaN(day) && !isNaN(month) && !isNaN(year))
+    {
+        return (
+            <span className="contact__data">{`${day}/${month}/${year}`}</span>
+        );    
+    }
+    else
+    {
+        return (
+            <span className="contact__data">{props.text}</span>
+        );
+    }
+    
 }
 
 export function SpanEmpresa(props)
