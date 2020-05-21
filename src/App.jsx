@@ -36,7 +36,15 @@ class App extends React.Component {
   
   componentDidMount()
   {
-    this.setState({ loading: true });
+    this.chamaAPI();
+  }
+  chamaAPI = () => {
+    this.setState({
+      contacts: [],
+      contactsFiltered: [],
+      loading: true
+    });
+
     let url='https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts';
     let resposta;
     
@@ -54,153 +62,77 @@ class App extends React.Component {
           });
         });
   }
-  handleClickName(event)
-  {
+  handleClickName = (event) =>{
     event.preventDefault();
+    let newContacts=this.state.contacts;
     
     this.setState({
-      contacts: [],
-      contactsFiltered: [],
-      loading: true
+      contacts: newContacts.sort(function (a, b) {
+        return (a.name >b.name) ? 1 : ((b.name >a.name) ? -1 : 0)}),
+      contactsFiltered: newContacts.sort(function (a, b) {
+        return (a.name >b.name) ? 1 : ((b.name >a.name) ? -1 : 0);
+      })
     });
-
-    let data;
-    let url='https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts';
-    fetch(url).then(res => res.json())
-    .then(resultado => {data=resultado;})
-      .then(() => {
-        this.setState({
-          contacts: data.sort(function (a, b) {
-            return (a.name >b.name) ? 1 : ((b.name >a.name) ? -1 : 0);
-          }),
-          contactsFiltered: data.sort(function (a, b) {
-            return (a.name >b.name) ? 1 : ((b.name >a.name) ? -1 : 0);
-          }),
-          loading: false
-        })
-      }); 
   }
-  handleClickCountry(event)
-  {
+  handleClickCountry = (event) =>{
     event.preventDefault();
+    let newContacts=this.state.contacts;
     
     this.setState({
-      contacts: [],
-      contactsFiltered: [],
-      loading: true
+      contacts: newContacts.sort(function (a, b) {
+        return (a.country >b.country) ? 1 : ((b.country >a.country) ? -1 : 0)}),
+      contactsFiltered: newContacts.sort(function (a, b) {
+        return (a.country >b.country) ? 1 : ((b.country >a.country) ? -1 : 0);
+      })
     });
-
-    let data;
-    let url='https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts';
-    fetch(url).then(res => res.json())
-    .then(resultado => {data=resultado;})
-      .then(() => {
-        this.setState({
-          contacts: data.sort(function (a, b) {
-            return (a.country >b.country) ? 1 : ((b.country >a.country) ? -1 : 0);
-          }),
-          contactsFiltered: data.sort(function (a, b) {
-            return (a.country >b.country) ? 1 : ((b.country >a.country) ? -1 : 0);
-          }),
-          loading: false
-        })
-      });
   }
-  handleClickCompany(event)
-  {
+  handleClickCompany = (event) => {
     event.preventDefault();
     
+    let newContacts=this.state.contacts;
+    
     this.setState({
-      contacts: [],
-      contactsFiltered: [],
-      loading: true
+      contacts: newContacts.sort(function (a, b) {
+        return (a.company >b.company) ? 1 : ((b.company >a.company) ? -1 : 0)}),
+      contactsFiltered: newContacts.sort(function (a, b) {
+        return (a.company >b.company) ? 1 : ((b.company >a.company) ? -1 : 0);
+      })
     });
-
-    let data;
-    let url='https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts';
-    fetch(url).then(res => res.json())
-    .then(resultado => {data=resultado;})
-      .then(() => {
-        this.setState({
-          contacts: data.sort(function (a, b) {
-            return (a.company >b.company) ? 1 : ((b.company >a.company) ? -1 : 0);
-          }),
-          contactsFiltered: data.sort(function (a, b) {
-            return (a.company >b.company) ? 1 : ((b.company >a.company) ? -1 : 0);
-          }),
-          loading: false
-        })
-      });
   }
-  handleClickDepartment(event)
-  {
+  handleClickDepartment = (event) => {
     event.preventDefault();
     
+    let newContacts=this.state.contacts;
+    
     this.setState({
-      contacts: [],
-      contactsFiltered: [],
-      loading: true
+      contacts: newContacts.sort(function (a, b) {
+        return (a.department >b.department) ? 1 : ((b.department >a.department) ? -1 : 0)}),
+      contactsFiltered: newContacts.sort(function (a, b) {
+        return (a.department >b.department) ? 1 : ((b.department >a.department) ? -1 : 0);
+      })
     });
-
-    let data;
-    let url='https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts';
-    fetch(url).then(res => res.json())
-    .then(resultado => {data=resultado;})
-      .then(() => {
-        this.setState({
-          contacts: data.sort(function (a, b) {
-            return (a.department >b.department) ? 1 : ((b.department >a.department) ? -1 : 0);
-          }),
-          contactsFiltered: data.sort(function (a, b) {
-            return (a.department >b.department) ? 1 : ((b.department >a.department) ? -1 : 0);
-          }),
-          loading: false
-        })
-      });
   }
-  handleClickDate(event, status)
-  {
+  handleClickDate =(event) => {
     event.preventDefault();
     
-    this.setState({
-      contacts: [],
-      contactsFiltered: [],
-      loading: true
-    });
-
-    let data;
-    let url='https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts';
-    fetch(url).then(res => res.json())
-    .then(resultado => {data=resultado;})
-      .then(() => {
-        this.setState({
-          contacts: data.sort(function (a, b) {
-            return (a.admissionDate >b.admissionDate) ? 1 : ((b.admissionDate >a.admissionDate) ? -1 : 0);
-          }),
-          contactsFiltered: data.sort(function (a, b) {
-            return (a.admissionDate >b.admissionDate) ? 1 : ((b.admissionDate >a.admissionDate) ? -1 : 0);
-          }),
-          loading: false
-        })
-      });
-  }
-  handleChange(event)
-  {
-    const {target: {value}, } = event;
+    let newContacts=this.state.contacts;
     
+    this.setState({
+      contacts: newContacts.sort(function (a, b) {
+        return (a.admissionDate >b.admissionDate) ? 1 : ((b.admissionDate >a.admissionDate) ? -1 : 0)}),
+      contactsFiltered: newContacts.sort(function (a, b) {
+        return (a.admissionDate >b.admissionDate) ? 1 : ((b.admissionDate >a.admissionDate) ? -1 : 0);
+      })
+    });
+  }
+  handleChange = (event) => {
+    const textFromInput=event.target.value;
     const datafilter = this.state.contacts.filter((item) => item.name.toLowerCase()
-    .startsWith(value.toLowerCase()));
-    if(datafilter=="")
+      .startsWith(textFromInput.toLowerCase()));
+    
+    if(datafilter==="")
     {
-      let data;
-      let url='https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts';
-      fetch(url).then(res => res.json())
-      .then(resultado => {data=resultado;})
-        .then(() => {
-          this.setState({
-            contactsFiltered: data
-          }); 
-        });   
+      this.chamaAPI();   
     }
     else
     {
@@ -218,7 +150,7 @@ class App extends React.Component {
             <ButtonCountry handleClick={event => this.handleClickCountry(event)}/>
             <ButtonCompany handleClick={event => this.handleClickCompany(event)}/>
             <ButtonDepartment handleClick={event => this.handleClickDepartment(event)}/>
-            <ButtonDate handleClick={event => this.handleClickDate(event, "date")}/>
+            <ButtonDate handleClick={event => this.handleClickDate(event)}/>
           </Filters>
           <div>
             <Contacts className="contacts">
